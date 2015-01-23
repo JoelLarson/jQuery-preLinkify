@@ -1,0 +1,11 @@
+{
+  "name": "jQuery-preLinkify",
+  "title": "PreLinkify",
+  "description": "Replaces invalid URLs and Email addresses with valid ones.",
+  "author": "Joel Larson",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/JoelLarson/jQuery-preLinkify.git"
+  },
+  "version": "1.0.0"
+}
