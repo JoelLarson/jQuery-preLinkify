@@ -1,0 +1,21 @@
+{
+    "name": "jQuery-preLinkify",
+    "version": "1.0.0",
+    "authors": [
+        "Joel Larson <joellarsonweb@gmail.com>"
+    ],
+    "description": "Find URLs in plain text and return HTML for discovered links.",
+    "main": "dist/jquery.linkify.js",
+    "dependencies": {
+        "jquery": ">=1.9.0"
+    },
+    "devDependencies": {
+        "qunit": "1.*"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "tests"
+    ]
+}
