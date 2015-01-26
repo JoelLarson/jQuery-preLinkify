@@ -5,7 +5,7 @@ test("Testing preLinkify string operations", function() {
 
     function createParagraphNode(contents) {
         var paragraph = document.createElement("p");
-        paragraph.appendChild(document.createTextNode(contents));
+        paragraph.innerHTML = contents;
 
         return $(paragraph);
     }
@@ -37,6 +37,16 @@ test("Testing preLinkify string operations", function() {
             output: 'example@aol.com example@aol.com example@aol.com example@aol.com example@aol.com'
         },
         {
+            name: 'Replace malformatted items with HTML in paragraph',
+            input: 'example@AOL.COM<br><b>Google.com</b><span>GOOGLE.com</span>',
+            output: 'example@aol.com<br><b>google.com</b><span>google.com</span>'
+        },
+        {
+            name: 'Replace malformatted items in all children',
+            input: '<div>example@AOL.COM<br><b><span>Google.com</span></b><span>GOOGLE.com</span></div>',
+            output: '<div>example@aol.com<br><b><span>google.com</span></b><span>google.com</span></div>'
+        },
+        {
             name: 'Regression of preLinkify with jQuery',
             input: 'This is an example body with google.com and Google.com ... example@aol.com example@AOL.COM example@Aol.com Example@Aol.Com EXAMPLE@AOL.COM as its contents.',
             output: 'This is an example body with google.com and google.com ... example@aol.com example@aol.com example@aol.com example@aol.com example@aol.com as its contents.'
@@ -55,13 +65,14 @@ test("Testing preLinkify string operations", function() {
 
 test ( "test preLinkify with linkify", function(assert) {
     var paragraph = document.createElement("p");
-    paragraph.appendChild(document.createTextNode("This is an example body with google.com and Google.com ... example@aol.com example@AOL.COM example@Aol.com Example@Aol.Com EXAMPLE@AOL.COM as its contents."));
+    paragraph.appendChild(document.createTextNode("This is an example body with google.com and Google.com\nexample@aol.com example@AOL.COM example@Aol.com Example@Aol.Com EXAMPLE@AOL.COM as its contents."));
 
     $(paragraph).preLinkify().linkify();
 
     assert.equal(
         $(paragraph).html(),
-        "This is an example body with <a href=\"http://google.com\" class=\"linkified\" target=\"_blank\">google.com</a> and <a href=\"http://google.com\" class=\"linkified\" target=\"_blank\">google.com</a> ... <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> as its contents.",
+        "This is an example body with <a href=\"http://google.com\" class=\"linkified\" target=\"_blank\">google.com</a> and <a href=\"http://google.com\" class=\"linkified\" target=\"_blank\">google.com</a>\n<a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> as its contents.",
         "Attempted preLinkify before running Linkify"
     );
+
 });
