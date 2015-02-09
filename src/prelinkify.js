@@ -1,9 +1,4 @@
-(function($){
-    $.fn.preLinkify = function() {
-        return this.each(function() {
-            PreLinkify(this)
-        });
-    };
+(function(){
 
     var PreLinkify = function(element) {
         if (element.nodeType === 1) {
@@ -110,4 +105,5 @@
             ].join('');
         });
     };
-})(jQuery);
+
+})();
