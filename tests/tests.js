@@ -50,6 +50,11 @@ test("Testing preLinkify string operations", function() {
             name: 'Regression of preLinkify with jQuery',
             input: 'This is an example body with google.com and Google.com ... example@aol.com example@AOL.COM example@Aol.com Example@Aol.Com EXAMPLE@AOL.COM as its contents.',
             output: 'This is an example body with google.com and google.com ... example@aol.com example@aol.com example@aol.com example@aol.com example@aol.com as its contents.'
+        },
+        {
+            name: 'Long URL with characters around it',
+            input: '"http://EXAMPLE.com/index.aspx?cid=ZBAQIkFnxZ0iG_uqMf3DXEoSxA--"',
+            output: '"http://example.com/index.aspx?cid=ZBAQIkFnxZ0iG_uqMf3DXEoSxA--"'
         }
     ];
 

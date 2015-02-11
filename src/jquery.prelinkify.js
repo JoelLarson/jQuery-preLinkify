@@ -15,9 +15,7 @@
 
     PreLinkify.matchRegex = new RegExp([
         // The groups
-        '(', // 1. Character before the link
-        '\\s|[^a-z0-9.\\+_\\/"\\>\\-]|^',
-        ')?(?:', //Main group
+        '(?:', //Main group
         '(', // 2. Email address (optional)
         '[a-z0-9\\+_\\-]+',
         '(?:',
@@ -42,8 +40,6 @@
         '|',
         '\\/?',
         ')?',
-        ')(', // 7. Character after the link
-        '[^a-z0-9\\+_\\/"\\<\\-]|$',
         ')'
     ].join(''), 'gi');
 
@@ -92,8 +88,7 @@
     };
 
     PreLinkify.correctText = function(text) {
-        return text.replace(PreLinkify.matchRegex, function(match, before, user, protocol, domain, tld, port, query, after){
-
+        return text.replace(PreLinkify.matchRegex, function(match, user, protocol, domain, tld, port, query){
             var lowerCaseUrl = [
                 user,
                 protocol,
@@ -103,10 +98,8 @@
             ].join('').toLowerCase();
 
             return [
-                before,
                 lowerCaseUrl,
-                query,
-                after
+                query
             ].join('');
         });
     };
