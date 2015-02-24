@@ -85,7 +85,6 @@
     PreLinkify.correctText = function(text) {
         return text.replace(PreLinkify.matchRegex, function(match, user, protocol, domain, tld, port, query){
             var lowerCaseUrl = [
-                user,
                 protocol,
                 domain,
                 tld,
@@ -93,6 +92,7 @@
             ].join('').toLowerCase();
 
             return [
+                user,
                 lowerCaseUrl,
                 query
             ].join('');

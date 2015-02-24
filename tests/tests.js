@@ -34,7 +34,7 @@ test("Testing preLinkify string operations", function() {
         {
             name: 'Replace email addresses',
             input: 'example@aol.com example@AOL.COM example@Aol.com Example@Aol.Com EXAMPLE@AOL.COM',
-            output: 'example@aol.com example@aol.com example@aol.com example@aol.com example@aol.com'
+            output: 'example@aol.com example@aol.com example@aol.com Example@aol.com EXAMPLE@aol.com'
         },
         {
             name: 'Replace malformatted items with HTML in paragraph',
@@ -49,7 +49,7 @@ test("Testing preLinkify string operations", function() {
         {
             name: 'Regression of preLinkify with jQuery',
             input: 'This is an example body with google.com and Google.com ... example@aol.com example@AOL.COM example@Aol.com Example@Aol.Com EXAMPLE@AOL.COM as its contents.',
-            output: 'This is an example body with google.com and google.com ... example@aol.com example@aol.com example@aol.com example@aol.com example@aol.com as its contents.'
+            output: 'This is an example body with google.com and google.com ... example@aol.com example@aol.com example@aol.com Example@aol.com EXAMPLE@aol.com as its contents.'
         },
         {
             name: 'Long URL with characters around it',
@@ -76,7 +76,9 @@ test ( "test preLinkify with linkify", function(assert) {
 
     assert.equal(
         $(paragraph).html(),
-        "This is an example body with <a href=\"http://google.com\" class=\"linkified\" target=\"_blank\">google.com</a> and <a href=\"http://google.com\" class=\"linkified\" target=\"_blank\">google.com</a>\n<a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> as its contents.",
+        "This is an example body with <a href=\"http://google.com\" class=\"linkified\" target=\"_blank\">google.com</a> and <a href=\"http://google.com\" class=\"linkified\" target=\"_blank\">google.com</a>\n<a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> " +
+        "<a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:example@aol.com\" class=\"linkified\" target=\"_blank\">example@aol.com</a> <a href=\"mailto:Example@aol.com\" class=\"linkified\" target=\"_blank\">Example@aol.com</a> " +
+        "<a href=\"mailto:EXAMPLE@aol.com\" class=\"linkified\" target=\"_blank\">EXAMPLE@aol.com</a> as its contents.",
         "Attempted preLinkify before running Linkify"
     );
 
